@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WantWhat - Reverse Marketplace</title>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>WantWhat</h1>
+      <p>The reverse eBay — see what people want and offer what you've got.</p>
+    </header>
+
+    <main>
+      <!-- Post Form -->
+      <section class="post-form">
+        <h2>Post What You Want</h2>
+        <form id="wantForm">
+          <label for="username">Your Name</label>
+          <input type="text" id="username" placeholder="e.g. Alex" required />
+
+          <label for="item">What Do You Want?</label>
+          <input type="text" id="item" placeholder="e.g. Vintage Nintendo 64" required />
+
+          <label for="price">Max Price (£)</label>
+          <input type="number" id="price" placeholder="Optional" />
+
+          <label for="details">Details</label>
+          <textarea id="details" placeholder="Any specific condition or preference?" rows="4"></textarea>
+
+          <button type="submit">Post Request</button>
+        </form>
+      </section>
+
+      <!-- Want Feed -->
+      <section class="feed">
+        <h2>Live Want Feed</h2>
+        <ul id="wantList"></ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 WantWhat. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
