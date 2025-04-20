@@ -4,16 +4,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WantWhat - Reverse Marketplace</title>
+  <title>WantWhat – Home</title>
   <link rel="stylesheet" href="style.css" />
   <script defer src="app.js"></script>
 </head>
 
 <body>
-  <header>
-    <h1>WantWhat</h1>
-    <p>The reverse eBay — see what people want and offer what you've got.</p>
-  </header>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-logo">WantWhat</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="profile.html">My Profile</a></li>
+      <li><a href="signup.html">Sign Up</a></li>
+      <li><a href="login.html">Login</a></li>
+    </ul>
+  </nav>
 
   <main>
     <!-- Post Form -->
@@ -21,24 +27,27 @@
       <h2>Post What You Want</h2>
       <form id="wantForm">
         <label for="username">Your Name</label>
-        <input type="text" id="username" placeholder="e.g. Alex" required />
+        <input type="text" id="username" required placeholder="e.g. Jamie" />
 
         <label for="item">What Do You Want?</label>
-        <input type="text" id="item" placeholder="e.g. Vintage Nintendo 64" required />
+        <input type="text" id="item" required placeholder="e.g. Retro skateboard" />
 
         <label for="price">Max Price (£)</label>
         <input type="number" id="price" placeholder="Optional" />
 
         <label for="details">Details</label>
-        <textarea id="details" placeholder="Any specific condition or preference?" rows="4"></textarea>
+        <textarea id="details" rows="4" placeholder="Condition, preferences, etc."></textarea>
 
-        <button type="submit">Post Request</button>
+        <label for="image">Upload a Photo (optional)</label>
+        <input type="file" id="image" accept="image/*" />
+
+        <button type="submit">Post</button>
       </form>
     </section>
 
     <!-- Filter Section -->
     <section class="filter-section">
-      <h2>Filter Requests</h2>
+      <h2>Search Requests</h2>
       <input type="text" id="filterInput" placeholder="Filter by item or username..." />
     </section>
 
@@ -50,7 +59,7 @@
   </main>
 
   <footer>
-    <p>&copy; 2025 WantWhat. Connect. Discover. Offer.</p>
+    <p>&copy; 2025 WantWhat. Built for sharing needs and finding value.</p>
   </footer>
 </body>
 
