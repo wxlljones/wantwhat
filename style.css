@@ -1,95 +1,148 @@
-/* style.css */
-
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f4f8ff;
+/* Base Reset */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f0f4fa;
   color: #333;
 }
 
-header {
-  background-color: #0077cc;
+/* NAVIGATION */
+.navbar {
+  background-color: #0a2647;
   color: white;
-  padding: 1.5rem 2rem;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-main {
-  padding: 2rem;
-  max-width: 900px;
-  margin: auto;
-}
-
-h2 {
-  color: #005fa3;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-}
-
-form {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.05);
-}
-
-input, textarea, button {
-  width: 100%;
-  padding: 0.75rem;
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-}
-
-button {
-  background-color: #0077cc;
-  color: white;
+.nav-logo {
+  font-size: 1.5rem;
   font-weight: bold;
-  border: none;
-  transition: background-color 0.3s ease;
+  color: white;
 }
 
-button:hover {
-  background-color: #005fa3;
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
 }
 
-.filter-section input {
-  border: 2px solid #0077cc;
+.nav-links li a {
+  text-decoration: none;
+  color: white;
   font-weight: 500;
 }
 
+.nav-links li a:hover {
+  color: #b084f5;
+}
+
+/* Main Layout */
+main {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+/* Headings */
+section h2 {
+  color: #0a2647;
+  margin-bottom: 1rem;
+}
+
+/* Form Styling */
+form {
+  background-color: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+form label {
+  display: block;
+  margin: 0.5rem 0 0.3rem;
+  font-weight: 600;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+form input[type="file"] {
+  padding: 0.4rem;
+}
+
+form button {
+  background-color: #5f27cd;
+  color: white;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+form button:hover {
+  background-color: #481aa8;
+}
+
+/* Filter Input */
+#filterInput {
+  padding: 0.75rem;
+  width: 100%;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #bbb;
+  margin-bottom: 2rem;
+}
+
+/* Want List Styling */
 .want-list ul {
   list-style: none;
   padding: 0;
 }
 
 .want-list li {
-  background: white;
-  padding: 1rem;
+  background-color: white;
+  border-left: 6px solid #5f27cd;
   margin-bottom: 1rem;
+  padding: 1rem;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-  line-height: 1.6;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s;
 }
 
-.want-list button {
-  width: auto;
-  margin-right: 10px;
-  background-color: #e0ecf9;
-  color: #0077cc;
-  font-weight: 500;
+.want-list li:hover {
+  transform: translateY(-2px);
 }
 
+.want-list img {
+  max-width: 100%;
+  max-height: 200px;
+  margin-top: 0.5rem;
+  border-radius: 6px;
+}
+
+/* Footer */
 footer {
   text-align: center;
-  padding: 1rem;
-  background: #e6f0fa;
-  color: #444;
-  margin-top: 4rem;
-  font-size: 0.9rem;
+  padding: 2rem;
+  color: #777;
 }
-
