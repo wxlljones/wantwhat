@@ -1,68 +1,65 @@
-// app.js
-
 document.addEventListener("DOMContentLoaded", () => {
-  const wantForm = document.getElementById("wantForm");
-  const wantList = document.getElementById("wantList");
+  const form = document.getElementById("wantForm");
+  const list = document.getElementById("wantList");
   const filterInput = document.getElementById("filterInput");
 
-  let wants = [];
+  const savedWants = JSON.parse(localStorage.getItem("wants")) || [];
 
-  wantForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const username = document.getElementById("username").value;
-    const item = document.getElementById("item").value;
-    const price = document.getElementById("price").value;
-    const details = document.getElementById("details").value;
-
-    const want = {
-      id: Date.now(),
-      username,
-      item,
-      price,
-      details,
-      likes: 0
-    };
-
-    wants.push(want);
-    renderWants();
-    wantForm.reset();
-  });
-
-  filterInput.addEventListener("input", (e) => {
-    const keyword = e.target.value.toLowerCase();
-    renderWants(keyword);
-  });
-
-  function renderWants(filter = "") {
-    wantList.innerHTML = "";
-    const filtered = wants.filter((w) =>
-      w.username.toLowerCase().includes(filter) ||
-      w.item.toLowerCase().includes(filter)
-    );
-
-    filtered.forEach((want) => {
+  function renderWants(wantsToRender) {
+    list.innerHTML = "";
+    wantsToRender.forEach((want) => {
       const li = document.createElement("li");
       li.innerHTML = `
-        <strong>${want.username}</strong> wants <em>${want.item}</em>
-        ${want.price ? `for £${want.price}` : ""}<br />
-        ${want.details ? `<small>${want.details}</small><br />` : ""}
-        <button onclick="likePost(${want.id})">❤️ ${want.likes}</button>
-        <button onclick="messageUser('${want.username}')">💬 Message</button>
+        <strong>${want.username}</strong> wants <strong>${want.item}</strong>
+        ${want.price ? `for up to £${want.price}` : ""}.
+        <p>${want.details}</p>
+        ${want.image ? `<img src="${want.image}" alt="Uploaded Image" />` : ""}
       `;
-      wantList.appendChild(li);
+      list.appendChild(li);
     });
   }
 
-  window.likePost = (id) => {
-    const post = wants.find(w => w.id === id);
-    if (post) {
-      post.likes++;
-      renderWants(filterInput.value.toLowerCase());
-    }
-  };
+  renderWants(savedWants);
 
-  window.messageUser = (username) => {
-    alert(`Messaging ${username}... (feature coming soon!)`);
-  };
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const username = document.getElementById("username").value.trim();
+    const item = document.getElementById("item").value.trim();
+    const price = document.getElementById("price").value.trim();
+    const details = document.getElementById("details").value.trim();
+    const imageFile = document.getElementById("image").files[0];
+
+    const reader = new FileReader();
+
+    reader.onload = function () {
+      const image = imageFile ? reader.result : null;
+
+      const want = { username, item, price, details, image };
+      savedWants.unshift(want);
+      localStorage.setItem("wants", JSON.stringify(savedWants));
+      renderWants(savedWants);
+      form.reset();
+    };
+
+    if (imageFile) {
+      reader.readAsDataURL(imageFile);
+    } else {
+      const want = { username, item, price, details, image: null };
+      savedWants.unshift(want);
+      localStorage.setItem("wants", JSON.stringify(savedWants));
+      renderWants(savedWants);
+      form.reset();
+    }
+  });
+
+  filterInput.addEventListener("input", () => {
+    const keyword = filterInput.value.toLowerCase();
+    const filtered = savedWants.filter(
+      (want) =>
+        want.username.toLowerCase().includes(keyword) ||
+        want.item.toLowerCase().includes(keyword)
+    );
+    renderWants(filtered);
+  });
 });
