@@ -1,95 +1,68 @@
-/* style.css */
+// app.js
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f4f8ff;
-  margin: 0;
-  padding: 0;
-  color: #333;
-}
+document.addEventListener("DOMContentLoaded", () => {
+  const wantForm = document.getElementById("wantForm");
+  const wantList = document.getElementById("wantList");
+  const filterInput = document.getElementById("filterInput");
 
-header {
-  background-color: #0077cc;
-  color: white;
-  padding: 1.5rem 2rem;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
+  let wants = [];
 
-main {
-  padding: 2rem;
-  max-width: 900px;
-  margin: auto;
-}
+  wantForm.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-h2 {
-  color: #005fa3;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-}
+    const username = document.getElementById("username").value;
+    const item = document.getElementById("item").value;
+    const price = document.getElementById("price").value;
+    const details = document.getElementById("details").value;
 
-form {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.05);
-}
+    const want = {
+      id: Date.now(),
+      username,
+      item,
+      price,
+      details,
+      likes: 0
+    };
 
-input, textarea, button {
-  width: 100%;
-  padding: 0.75rem;
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-}
+    wants.push(want);
+    renderWants();
+    wantForm.reset();
+  });
 
-button {
-  background-color: #0077cc;
-  color: white;
-  font-weight: bold;
-  border: none;
-  transition: background-color 0.3s ease;
-}
+  filterInput.addEventListener("input", (e) => {
+    const keyword = e.target.value.toLowerCase();
+    renderWants(keyword);
+  });
 
-button:hover {
-  background-color: #005fa3;
-}
+  function renderWants(filter = "") {
+    wantList.innerHTML = "";
+    const filtered = wants.filter((w) =>
+      w.username.toLowerCase().includes(filter) ||
+      w.item.toLowerCase().includes(filter)
+    );
 
-.filter-section input {
-  border: 2px solid #0077cc;
-  font-weight: 500;
-}
+    filtered.forEach((want) => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <strong>${want.username}</strong> wants <em>${want.item}</em>
+        ${want.price ? `for £${want.price}` : ""}<br />
+        ${want.details ? `<small>${want.details}</small><br />` : ""}
+        <button onclick="likePost(${want.id})">❤️ ${want.likes}</button>
+        <button onclick="messageUser('${want.username}')">💬 Message</button>
+      `;
+      wantList.appendChild(li);
+    });
+  }
 
-.want-list ul {
-  list-style: none;
-  padding: 0;
-}
+  window.likePost = (id) => {
+    const post = wants.find(w => w.id === id);
+    if (post) {
+      post.likes++;
+      renderWants(filterInput.value.toLowerCase());
+    }
+  };
 
-.want-list li {
-  background: white;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-  line-height: 1.6;
-}
-
-.want-list button {
-  width: auto;
-  margin-right: 10px;
-  background-color: #e0ecf9;
-  color: #0077cc;
-  font-weight: 500;
-}
-
-footer {
-  text-align: center;
-  padding: 1rem;
-  background: #e6f0fa;
-  color: #444;
-  margin-top: 4rem;
-  font-size: 0.9rem;
-}
-
+  window.messageUser = (username) => {
+    alert(`Messaging ${username}... (feature coming soon!)`);
+  };
+});
