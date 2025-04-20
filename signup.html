@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up – WantWhat</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="signup.js"></script>
+</head>
+
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-logo">WantWhat</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="profile.html">My Profile</a></li>
+      <li><a href="signup.html" class="active">Sign Up</a></li>
+      <li><a href="login.html">Login</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="signup-section">
+      <h2>Create Your Account</h2>
+      <form id="signupForm">
+        <label for="username">Choose a Username</label>
+        <input type="text" id="username" placeholder="e.g. Alex" required />
+        <button type="submit">Sign Up</button>
+      </form>
+      <p id="welcomeMessage" style="margin-top: 1rem;"></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 WantWhat. Built for sharing needs and finding value.</p>
+  </footer>
+</body>
+
+</html>
